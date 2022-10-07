@@ -1,3 +1,4 @@
+import { Link } from '@react-navigation/native';
 import React, { useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -11,6 +12,9 @@ const HomeScreen = () => {
       <Spinner visible={isLoading} />
       <Text style={styles.welcome}>Welcome {userInfo.accountUsername}</Text>
       <Button title="Logout" color="red" onPress={logout} />
+      <Link to={{ screen: 'Login' }}>
+        Login
+      </Link>
     </View>
   );
 };
@@ -20,6 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: "#E5E5E5",
   },
   welcome: {
     fontSize: 18,

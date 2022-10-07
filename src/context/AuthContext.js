@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useLinkTo } from '@react-navigation/native';
+import { StackActions, useLinkTo } from '@react-navigation/native';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../config';
-// import { StackActions } from '@react-navigation/native';
+
 
 
 
@@ -11,7 +11,7 @@ export const AuthContext = createContext();
 
 
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children, navigation }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
@@ -102,11 +102,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    console.log('log')
     try {
-      console.log('log2')
       await AsyncStorage.removeItem('userInfo').then(() => {
-        linkTo("Login")
         console.log("data", AsyncStorage.userInfo)
       })
     }

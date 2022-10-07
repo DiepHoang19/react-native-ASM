@@ -29,14 +29,14 @@ const LoginScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           value={username}
-          placeholder="Enter username"
+          placeholder="username"
           onChangeText={text => setUsername(text)}
         />
 
         <TextInput
           style={styles.input}
           value={password}
-          placeholder="Enter password"
+          placeholder="Password"
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: "#E5E5E5",
   },
   wrapper: {
     width: '80%',
