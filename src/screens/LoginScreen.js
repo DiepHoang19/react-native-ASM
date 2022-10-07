@@ -1,23 +1,30 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Button,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
   StyleSheet,
+  Image,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
+import { Link } from '@react-navigation/native';
 
-const LoginScreen = ({navigation}) => {
+
+
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
-  const {isLoading, login} = useContext(AuthContext);
+  const { isLoading, login } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Spinner visible={isLoading} />
+      <Image
+        style={styles.tinyLogo}
+        source={require('../image/login.png')}
+      />
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
@@ -41,11 +48,12 @@ const LoginScreen = ({navigation}) => {
           }}
         />
 
-        <View style={{flexDirection: 'row', marginTop: 20}}>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <Text>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.link}>Register</Text>
-          </TouchableOpacity>
+          <Link style={styles.link} to={{ screen: 'Register', }}>
+            Register
+          </Link>
+
         </View>
       </View>
     </View>
@@ -60,6 +68,16 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '80%',
+    marginTop: 350
+
+  },
+  tinyLogo: {
+    position: 'relative',
+    left: 20,
+    right: 32.54,
+    top: 250,
+    bottom: 1.92,
+
   },
   input: {
     marginBottom: 12,
@@ -67,6 +85,7 @@ const styles = StyleSheet.create({
     borderColor: '#bbb',
     borderRadius: 5,
     paddingHorizontal: 14,
+
   },
   link: {
     color: 'blue',

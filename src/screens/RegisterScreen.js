@@ -1,4 +1,5 @@
-import React, {useContext, useState} from 'react';
+import { Link } from '@react-navigation/native';
+import React, { useContext, useState } from 'react';
 import {
   Button,
   Text,
@@ -6,39 +7,44 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Image,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const {isLoading, register} = useContext(AuthContext);
+  const { isLoading, register } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Spinner visible={isLoading} />
       <View style={styles.wrapper}>
+        <Image
+          style={styles.tinyLogo}
+          source={require('../image/register.png')}
+        />
         <TextInput
           style={styles.input}
           value={username}
-          placeholder="Enter username"
+          placeholder="user name"
           onChangeText={text => setUsername(text)}
         />
 
         <TextInput
           style={styles.input}
           value={email}
-          placeholder="Enter email"
+          placeholder="Email "
           onChangeText={text => setEmail(text)}
         />
 
         <TextInput
           style={styles.input}
           value={password}
-          placeholder="Enter password"
+          placeholder="Password"
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
@@ -50,11 +56,11 @@ const RegisterScreen = ({navigation}) => {
           }}
         />
 
-        <View style={{flexDirection: 'row', marginTop: 20}}>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <Text>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.link}>Login</Text>
-          </TouchableOpacity>
+          <Link style={styles.link} to={{ screen: "Login" }} >
+            Login
+          </Link>
         </View>
       </View>
     </View>
@@ -69,6 +75,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '80%',
+    marginTop: 300
   },
   input: {
     marginBottom: 12,
@@ -80,6 +87,13 @@ const styles = StyleSheet.create({
   link: {
     color: 'blue',
   },
+  tinyLogo: {
+    position: 'relative',
+    width: 168,
+    height: 142,
+    left: 60,
+    top: -100,
+  }
 });
 
 export default RegisterScreen;

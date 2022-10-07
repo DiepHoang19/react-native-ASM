@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import React, { useContext } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const HomeScreen = () => {
-  const {userInfo, isLoading, logout} = useContext(AuthContext);
+  const { userInfo, isLoading, logout } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
