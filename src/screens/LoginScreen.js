@@ -38,30 +38,6 @@ const LoginScreen = ({ navigation }) => {
       })
   }
 
-  // const login = (username, password) => {
-  //   if (username == "" || password == "") {
-  //     alert("Null")
-  //   } else {
-  //     setIsLoading(true);
-  //     axios
-  //       .post(`${BASE_URL}/api/v1/accounts/login`, {
-  //         username,
-  //         password,
-  //       })
-  //       .then(res => {
-  //         let userInfo = res.data;
-  //         console.log(userInfo);
-  //         setUserInfo(userInfo);
-  //         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-  //         setIsLoading(false);
-  //       })
-  //       .catch(e => {
-  //         console.log(e)
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // };
-
 
   return (
     <View style={styles.container}>

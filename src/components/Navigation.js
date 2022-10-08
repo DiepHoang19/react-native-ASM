@@ -7,8 +7,12 @@ import RegisterScreen from '../screens/RegisterScreen';
 import { AuthContext } from '../context/AuthContext';
 import SplashScreen from '../screens/SplashScreen';
 import ListAccount from '../ListAccount/ListAccount';
+import CreateAccount from '../CreateAccount/CreateAccount';
+
 
 const Stack = createNativeStackNavigator();
+
+
 
 const Navigation = () => {
   const { userInfo, splashLoading } = useContext(AuthContext);
@@ -16,22 +20,27 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='ListAccount'>
+      <Stack.Navigator useLegacyImplementation initialRouteName='ListAccount'>
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          // options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-          // options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="ListAccount"
           component={ListAccount}
-          // options={{ headerShown: false }}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="Create"
+          component={CreateAccount}
+          options={{ headerShown: true }}
         />
 
       </Stack.Navigator>

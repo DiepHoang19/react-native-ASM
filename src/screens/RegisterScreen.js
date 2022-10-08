@@ -48,28 +48,6 @@ const RegisterScreen = ({ navigation }) => {
 
   }
 
-  // const register = (username, email, password) => {
-  //   setIsLoading(true);
-  //   axios
-  //     .post(`${BASE_URL}/api/v1/accounts/register`, {
-  //       username,
-  //       email,
-  //       password,
-  //     })
-  //     .then(res => {
-  //       // navigation.navigate("Home")
-  //       let userInfo = res.data;
-  //       setUserInfo(userInfo);
-  //       AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-  //       setIsLoading(false);
-  //       console.log(userInfo);
-  //     })
-  //     .catch(e => {
-  //       console.log(`register error ${e}`);
-  //       setIsLoading(false);
-  //     });
-  // };
-
   return (
     <View style={styles.container}>
       <Spinner visible={isLoading} />
