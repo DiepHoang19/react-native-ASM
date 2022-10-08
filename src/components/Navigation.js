@@ -1,26 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import { AuthContext } from '../context/AuthContext';
-import SplashScreen from '../screens/SplashScreen';
 import ListAccount from '../ListAccount/ListAccount';
 import CreateAccount from '../CreateAccount/CreateAccount';
 
-
 const Stack = createNativeStackNavigator();
 
-
-
 const Navigation = () => {
-  const { userInfo, splashLoading } = useContext(AuthContext);
-
-
   return (
     <NavigationContainer>
-      <Stack.Navigator useLegacyImplementation initialRouteName='ListAccount'>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen
           name="Login"

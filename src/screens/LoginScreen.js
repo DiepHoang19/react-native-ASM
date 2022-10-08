@@ -19,21 +19,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
-  const { isLoading, login } = useContext(AuthContext);
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setIsLoading(true)
     axios.post(`${BASE_URL}/api/v1/accounts/login`, {
       username,
       password
     })
       .then((res) => {
+        setIsLoading(false)
         let userInfo = res.data;
         console.log(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         navigation.navigate("Home")
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err)
       })
   }
@@ -61,13 +63,6 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
-
-        {/* <Button
-          title="Login"
-          onPress={() => {
-            login(username, password);
-          }}
-        /> */}
         <Button title='Submit' onPress={handleSubmit} />
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>

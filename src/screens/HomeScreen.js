@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
         style={styles.logo}
         source={require('../image/logoHome.jpg')}
       />
-      <Text style={styles.welcome}>Welcome{userInfo.accountUsername}</Text>
+      <Text style={styles.welcome}>Welcome {userInfo.accountUsername}</Text>
       <Link to={{ screen: "ListAccount" }} style={{}}>
         List Account
       </Link>

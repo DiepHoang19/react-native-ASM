@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { BASE_URL } from '../config';
-import { AuthContext } from '../context/AuthContext';
+
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // const { isLoading, register } = useContext(AuthContext);
+
 
   const handleRegister = () => {
     setIsLoading(true)
@@ -33,10 +33,10 @@ const RegisterScreen = ({ navigation }) => {
         password,
       })
       .then(res => {
-        navigation.navigate("Home")
+        navigation.navigate("Login")
         let userInfo = res.data;
         setUserInfo(userInfo);
-        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        AsyncStorage.setItem('userInfo');
         setIsLoading(false);
         console.log(userInfo);
       })
