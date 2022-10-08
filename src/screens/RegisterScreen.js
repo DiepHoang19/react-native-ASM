@@ -1,4 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from '@react-navigation/native';
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import {
   Button,
@@ -10,14 +12,63 @@ import {
   Image,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { BASE_URL } from '../config';
 import { AuthContext } from '../context/AuthContext';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { isLoading, register } = useContext(AuthContext);
+  // const { isLoading, register } = useContext(AuthContext);
+
+  const handleRegister = () => {
+    setIsLoading(true)
+    axios
+      .post(`${BASE_URL}/api/v1/accounts/register`, {
+        username,
+        email,
+        password,
+      })
+      .then(res => {
+        navigation.navigate("Home")
+        let userInfo = res.data;
+        setUserInfo(userInfo);
+        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        setIsLoading(false);
+        console.log(userInfo);
+      })
+      .catch(err => {
+        console.log(`register error ${err}`);
+        setIsLoading(false);
+      });
+
+
+  }
+
+  // const register = (username, email, password) => {
+  //   setIsLoading(true);
+  //   axios
+  //     .post(`${BASE_URL}/api/v1/accounts/register`, {
+  //       username,
+  //       email,
+  //       password,
+  //     })
+  //     .then(res => {
+  //       // navigation.navigate("Home")
+  //       let userInfo = res.data;
+  //       setUserInfo(userInfo);
+  //       AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+  //       setIsLoading(false);
+  //       console.log(userInfo);
+  //     })
+  //     .catch(e => {
+  //       console.log(`register error ${e}`);
+  //       setIsLoading(false);
+  //     });
+  // };
 
   return (
     <View style={styles.container}>
@@ -48,15 +99,16 @@ const RegisterScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
-
+        {/* 
         <Button
           title="Register"
           onPress={() => {
             register(username, email, password);
           }}
-        />
+        /> */}
+        <Button title='Register' onPress={handleRegister} />
 
-        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <Text>Already have an account? </Text>
           <Link style={styles.link} to={{ screen: "Login" }} >
             Login
@@ -76,7 +128,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '80%',
-    marginTop: 300
+    marginTop: 250
   },
   input: {
     marginBottom: 12,

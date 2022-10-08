@@ -10,6 +10,9 @@ import {
 import Spinner from 'react-native-loading-spinner-overlay';
 import { AuthContext } from '../context/AuthContext';
 import { Link } from '@react-navigation/native';
+import axios from 'axios';
+import { BASE_URL } from '../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -17,6 +20,48 @@ const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const { isLoading, login } = useContext(AuthContext);
+
+
+  const handleSubmit = async () => {
+    axios.post(`${BASE_URL}/api/v1/accounts/login`, {
+      username,
+      password
+    })
+      .then((res) => {
+        let userInfo = res.data;
+        console.log(userInfo);
+        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+        navigation.navigate("Home")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // const login = (username, password) => {
+  //   if (username == "" || password == "") {
+  //     alert("Null")
+  //   } else {
+  //     setIsLoading(true);
+  //     axios
+  //       .post(`${BASE_URL}/api/v1/accounts/login`, {
+  //         username,
+  //         password,
+  //       })
+  //       .then(res => {
+  //         let userInfo = res.data;
+  //         console.log(userInfo);
+  //         setUserInfo(userInfo);
+  //         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+  //         setIsLoading(false);
+  //       })
+  //       .catch(e => {
+  //         console.log(e)
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // };
+
 
   return (
     <View style={styles.container}>
@@ -41,12 +86,13 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
         />
 
-        <Button
+        {/* <Button
           title="Login"
           onPress={() => {
             login(username, password);
           }}
-        />
+        /> */}
+        <Button title='Submit' onPress={handleSubmit} />
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <Text>Don't have an account? </Text>

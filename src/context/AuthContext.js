@@ -17,7 +17,7 @@ export const AuthProvider = ({ children, navigation }) => {
   const [splashLoading, setSplashLoading] = useState(false);
   const [accountList, setAccountList] = useState([])
 
-  const linkTo = useLinkTo();
+
 
   const listAccount = (username, email, id) => {
     setIsLoading(true);
@@ -82,23 +82,27 @@ export const AuthProvider = ({ children, navigation }) => {
   };
 
   const login = (username, password) => {
-    setIsLoading(true);
-    axios
-      .post(`${BASE_URL}/api/v1/accounts/login`, {
-        username,
-        password,
-      })
-      .then(res => {
-        let userInfo = res.data;
-        console.log(userInfo);
-        setUserInfo(userInfo);
-        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-        setIsLoading(false);
-      })
-      .catch(e => {
-        console.log(e)
-        setIsLoading(false);
-      });
+    if (username == "" || password == "") {
+      alert("Null")
+    } else {
+      setIsLoading(true);
+      axios
+        .post(`${BASE_URL}/api/v1/accounts/login`, {
+          username,
+          password,
+        })
+        .then(res => {
+          let userInfo = res.data;
+          console.log(userInfo);
+          setUserInfo(userInfo);
+          AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+          setIsLoading(false);
+        })
+        .catch(e => {
+          console.log(e)
+          setIsLoading(false);
+        });
+    }
   };
 
   const logout = async () => {
@@ -115,8 +119,7 @@ export const AuthProvider = ({ children, navigation }) => {
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
-
-      let userInfo = await AsyncStorage.getItem('accessToken');
+      let userInfo = await AsyncStorage.getItem('userInfo');
       userInfo = JSON.parse(userInfo);
 
       if (userInfo) {
