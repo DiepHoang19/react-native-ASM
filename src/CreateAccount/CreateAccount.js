@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Checkbox, RadioButton } from 'react-native-paper';
 import { CheckBox } from '@rneui/base';
 import { CheckboxIOS } from 'react-native-paper/lib/typescript/components/Checkbox/CheckboxIOS';
+import { Link } from '@react-navigation/native';
 
 
 const CreateAccount = ({ navigation }) => {
@@ -120,6 +121,9 @@ const CreateAccount = ({ navigation }) => {
                     title="Add"
                     onPress={handleCreate}
                 />
+                <Link to={{ screen: "List-Customer" }} style={{ marginTop: 40, backgroundColor: "blue", color: "white", height: 50, padding: 15 }}>
+                    Search Customer
+                </Link>
             </View>
         </View>
     )
