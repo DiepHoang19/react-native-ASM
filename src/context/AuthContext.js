@@ -1,10 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StackActions, useLinkTo } from '@react-navigation/native';
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
-import { BASE_URL } from '../config';
-
-
 
 
 export const AuthContext = createContext();
@@ -20,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
-      let userInfo = await AsyncStorage.getItem('userInfo');
+      let userInfo = await AsyncStorage.getItem('accessToken');
       userInfo = JSON.parse(userInfo);
 
       if (userInfo) {
@@ -44,7 +39,7 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         userInfo,
         splashLoading,
-      
+
       }}>
       {children}
     </AuthContext.Provider>

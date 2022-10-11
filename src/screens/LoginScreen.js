@@ -6,38 +6,66 @@ import {
   View,
   StyleSheet,
   Image,
+  AsyncStorage,
 } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { AuthContext } from '../context/AuthContext';
 import { Link } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async () => {
-    setIsLoading(true)
-    axios.post(`${BASE_URL}/api/v1/accounts/login`, {
-      username,
-      password
-    })
-      .then((res) => {
-        setIsLoading(false)
-        let userInfo = res.data;
-        console.log(userInfo);
-        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
-        navigation.navigate("Home")
+  // const handleSubmit = async () => {
+  //   setIsLoading(true)
+  //   axios.post(`${BASE_URL}/api/v1/accounts/login`, {
+  //     email,
+  //     password
+  //   })
+  //     .then((res) => {
+  //       setIsLoading(false)
+  //       let userInfo = res.data;
+  //       console.log(userInfo);
+  //       AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+  //       navigation.navigate("Home")
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false)
+  //       console.log(err)
+  //     })
+  // }
+
+  const handleLogin = async () => {
+    // setIsLoading(true)
+    try {
+      const res = await axios.post(`${BASE_URL}/api/v1/accounts/login`, {
+        email,
+        password
       })
-      .catch((err) => {
-        setIsLoading(false)
-        console.log(err)
-      })
+      AsyncStorage.setItem('accessToken', res.data.accessToken);
+      AsyncStorage.setItem('accountUsername', res.data.accountUsername);
+    } catch (error) {
+      console.log(error);
+    }
+    
+      // .then((res) => {
+      //   console.log("user logger", res.data.accessToken);
+        
+      //   // AsyncStorage.setItem("accessToken", res.data.accessToken);
+      //   // AsyncStorage.setItem("accountUsername", );
+      //   console.log("username", res.data.accountUsername);
+      //   // navigation.navigate("Home");
+      // })
+      // .catch((err) => {
+      //   // setIsLoading(false)
+      //   console.log(err)
+      // })
+      navigation.navigate("Home");
   }
 
 
@@ -51,9 +79,9 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
-          value={username}
-          placeholder="username"
-          onChangeText={text => setUsername(text)}
+          value={email}
+          placeholder="Email"
+          onChangeText={text => setEmail(text)}
         />
 
         <TextInput
@@ -63,7 +91,7 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
-        <Button title='Submit' onPress={handleSubmit} />
+        <Button title='Submit' onPress={handleLogin} />
 
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <Text>Don't have an account? </Text>

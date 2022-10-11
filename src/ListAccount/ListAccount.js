@@ -8,6 +8,13 @@ import { Link } from '@react-navigation/native';
 const ListAccount = () => {
     const [listAccount, setListAccount] = useState([])
 
+    const phoneNumber = [
+        {
+            phone: "033456789",
+            gender: "Male",
+
+        }
+    ]
 
     useEffect(() => {
         getList();
@@ -39,15 +46,31 @@ const ListAccount = () => {
                 {listAccount.map((item, index) => {
                     return (
                         <View key={index}>
-                            <Text style={{ padding: 10 }}>
-                                id:  {item.id}
-                            </Text>
-                            <Text style={{ padding: 10 }}>
-                                username : {item.username}
-                            </Text>
-                            <Text style={{ padding: 10 }}>
-                                email : {item.email}
-                            </Text>
+                            {
+                                phoneNumber.map((Items) => {
+                                    return (
+                                        <>
+                                            <Text style={{ padding: 10 }}>
+                                                id:  {item.id}
+
+                                            </Text>
+                                            <Text style={{ padding: 10 }}>
+                                                Customer : {item.username}
+                                            </Text>
+                                            <Text style={{ padding: 10 }}>
+                                                email : {item.email}
+                                            </Text>
+                                            <Text style={{ padding: 10 }}>
+                                                Gender : {Items.gender}
+                                            </Text>
+                                            <Text style={{ padding: 10 }}>
+                                                Phone Number : {Items.phone}
+                                            </Text>
+
+                                        </>
+                                    )
+                                })
+                            }
                         </View>
                     );
                 })}

@@ -1,18 +1,27 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from '@react-navigation/native';
-import React, { useContext } from 'react';
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+// import { AUTH_USERNAME } from '../config';
+
 import { AuthContext } from '../context/AuthContext';
 
 const HomeScreen = ({ navigation }) => {
   const { userInfo, isLoading, logout } = useContext(AuthContext);
+  const [username, setUsername] = useState(null);
+
+
 
   const handleLogout = () => {
-    AsyncStorage.removeItem("userInfo");
-    console.log("Remove", AsyncStorage.userInfo)
-    navigation.navigate("Login")
+    AsyncStorage.removeItem("accessToken");
+    navigation.navigate("Login");
   }
+
+  useEffect(async () => {
+    setUsername(await AsyncStorage.getItem("accountUsername"))
+  }, [])
+
+
 
   return (
     <View style={styles.container}>
@@ -21,13 +30,14 @@ const HomeScreen = ({ navigation }) => {
         style={styles.logo}
         source={require('../image/logoHome.jpg')}
       />
-      <Text style={styles.welcome}>Welcome {userInfo.accountUsername}</Text>
-      <Link to={{ screen: "ListAccount" }} style={{}}>
-        List Account
+      <Text style={styles.welcome}>username: {username} </Text>
+      <Link to={{ screen: "List-Customer" }} >
+        List Customers
       </Link>
-      <Link to={{ screen: "Create" }}>
-        CreateAccount
+      <Link to={{ screen: "Create-Customer" }}>
+        Create Customers
       </Link>
+
       <Text style={{
         color: "#50C2C9",
         position: "absolute",

@@ -6,6 +6,8 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ListAccount from '../ListAccount/ListAccount';
 import CreateAccount from '../CreateAccount/CreateAccount';
+import CreatePost from '../post/CreatePost/CreatePost';
+import ListPost from '../post/ListPost/ListPost';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,15 +27,16 @@ const Navigation = () => {
           options={{ headerShown: true }}
         />
         <Stack.Screen
-          name="ListAccount"
+          name="List-Customer"
           component={ListAccount}
           options={{ headerShown: true }}
         />
         <Stack.Screen
-          name="Create"
+          name="Create-Customer"
           component={CreateAccount}
           options={{ headerShown: true }}
         />
+       
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,12 +1,12 @@
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../context/AuthContext';
+import { Button, StyleSheet, TextInput, View, Text } from 'react-native'
+import React, { useState } from 'react'
 import Spinner from 'react-native-loading-spinner-overlay';
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Checkbox, RadioButton } from 'react-native-paper';
+import { CheckBox } from '@rneui/base';
+import { CheckboxIOS } from 'react-native-paper/lib/typescript/components/Checkbox/CheckboxIOS';
 
 
 const CreateAccount = ({ navigation }) => {
@@ -15,7 +15,10 @@ const CreateAccount = ({ navigation }) => {
     const [password, setPassword] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [userInfo, setUserInfo] = useState({});
-    // const { isLoading, createAccount } = useContext(AuthContext);
+
+    const [checked, setChecked] = useState('first');
+    const [second, setSecond] = useState('');
+
 
     const handleCreate = () => {
         setIsLoading(true)
@@ -26,7 +29,7 @@ const CreateAccount = ({ navigation }) => {
                 password,
             })
             .then(res => {
-                navigation.navigate("ListAccount")
+                navigation.navigate("List-Customer")
                 let userInfo = res.data;
                 setUserInfo(userInfo);
                 AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
@@ -71,8 +74,9 @@ const CreateAccount = ({ navigation }) => {
                 <TextInput
                     style={styles.input}
                     value={username}
-                    placeholder="user name"
+                    placeholder="customer name"
                     onChangeText={text => setUsername(text)}
+
                 />
                 <TextInput
                     style={styles.input}
@@ -80,12 +84,37 @@ const CreateAccount = ({ navigation }) => {
                     placeholder="Email"
                     onChangeText={text => setEmail(text)}
                 />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Phone Number"
+
+                />
                 <TextInput
                     style={styles.input}
                     value={password}
                     placeholder="Password"
                     onChangeText={text => setPassword(text)}
                     secureTextEntry
+                />
+                <Text>
+                    Gender
+                </Text>
+                <Text >
+                    Male
+                </Text>
+                <RadioButton
+                    value="first"
+                    status={checked === 'first' ? 'checked' : 'unchecked'}
+                    onPress={() => setChecked('first')}
+                />
+                <Text>
+                    Female
+                </Text>
+                <RadioButton
+                    value="second"
+                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                    onPress={() => setChecked('second')}
                 />
                 <Button
                     title="Add"
@@ -106,10 +135,10 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         width: '80%',
-        marginTop: 300
+        marginTop: 200
     },
     input: {
-        marginBottom: 12,
+        marginBottom: 5,
         borderWidth: 1,
         borderColor: '#bbb',
         borderRadius: 5,

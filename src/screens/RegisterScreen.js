@@ -33,12 +33,16 @@ const RegisterScreen = ({ navigation }) => {
         password,
       })
       .then(res => {
-        navigation.navigate("Login")
-        let userInfo = res.data;
-        setUserInfo(userInfo);
-        AsyncStorage.setItem('userInfo');
+        console.log(res.data);
         setIsLoading(false);
-        console.log(userInfo);
+        alert("create success!")
+        navigation.navigate("Login")
+        // navigation.navigate("Login")
+        // let userInfo = res.data;
+        // setUserInfo(userInfo);
+        // AsyncStorage.setItem('userInfo');
+        // setIsLoading(false);
+        // console.log(userInfo);
       })
       .catch(err => {
         console.log(`register error ${err}`);
