@@ -37,19 +37,11 @@ const RegisterScreen = ({ navigation }) => {
         setIsLoading(false);
         alert("create success!")
         navigation.navigate("Login")
-        // navigation.navigate("Login")
-        // let userInfo = res.data;
-        // setUserInfo(userInfo);
-        // AsyncStorage.setItem('userInfo');
-        // setIsLoading(false);
-        // console.log(userInfo);
       })
       .catch(err => {
         console.log(`register error ${err}`);
         setIsLoading(false);
       });
-
-
   }
 
   return (
@@ -81,15 +73,7 @@ const RegisterScreen = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           secureTextEntry
         />
-        {/* 
-        <Button
-          title="Register"
-          onPress={() => {
-            register(username, email, password);
-          }}
-        /> */}
         <Button title='Register' onPress={handleRegister} />
-
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <Text>Already have an account? </Text>
           <Link style={styles.link} to={{ screen: "Login" }} >

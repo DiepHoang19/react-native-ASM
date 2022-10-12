@@ -2,7 +2,6 @@ import { Link } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-// import { AUTH_USERNAME } from '../config';
 
 import { AuthContext } from '../context/AuthContext';
 
@@ -36,6 +35,9 @@ const HomeScreen = ({ navigation }) => {
       </Link>
       <Link to={{ screen: "Create-Customer" }}>
         Create Customers
+      </Link>
+      <Link to={{ screen: "Post-List" }}>
+        List Post
       </Link>
 
       <Text style={{

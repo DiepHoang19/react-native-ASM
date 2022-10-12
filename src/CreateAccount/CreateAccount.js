@@ -4,9 +4,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Checkbox, RadioButton } from 'react-native-paper';
-import { CheckBox } from '@rneui/base';
-import { CheckboxIOS } from 'react-native-paper/lib/typescript/components/Checkbox/CheckboxIOS';
+import { RadioButton } from 'react-native-paper';
 import { Link } from '@react-navigation/native';
 
 
@@ -16,9 +14,8 @@ const CreateAccount = ({ navigation }) => {
     const [password, setPassword] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [userInfo, setUserInfo] = useState({});
-
     const [checked, setChecked] = useState('first');
-    const [second, setSecond] = useState('');
+
 
 
     const handleCreate = () => {
@@ -44,30 +41,6 @@ const CreateAccount = ({ navigation }) => {
 
 
     }
-
-
-
-    // const register = (username, email, password) => {
-    //     setIsLoading(true);
-    //     axios
-    //         .post(`${BASE_URL}/api/v1/accounts/register`, {
-    //             username,
-    //             email,
-    //             password,
-    //         })
-    //         .then(res => {
-    //             let userInfo = res.data;
-    //             setUserInfo(userInfo);
-    //             AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-    //             setIsLoading(false);
-    //             console.log(userInfo);
-    //         })
-    //         .catch(e => {
-    //             console.log(`register error ${e}`);
-    //             setIsLoading(false);
-    //         });
-    // };
-
     return (
         <View style={styles.container}>
             <Spinner visible={isLoading} />

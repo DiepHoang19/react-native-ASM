@@ -52,7 +52,6 @@ const ListAccount = () => {
                                         <>
                                             <Text style={{ padding: 10 }}>
                                                 id:  {item.id}
-
                                             </Text>
                                             <Text style={{ padding: 10 }}>
                                                 Customer : {item.username}
@@ -66,7 +65,6 @@ const ListAccount = () => {
                                             <Text style={{ padding: 10 }}>
                                                 Phone Number : {Items.phone}
                                             </Text>
-
                                         </>
                                     )
                                 })

@@ -36,7 +36,12 @@ const Navigation = () => {
           component={CreateAccount}
           options={{ headerShown: true }}
         />
-       
+        <Stack.Screen
+          name="Post-List"
+          component={ListPost}
+          options={{ headerShown: true }}
+        />
+
 
       </Stack.Navigator>
     </NavigationContainer>

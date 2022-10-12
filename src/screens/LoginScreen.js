@@ -21,27 +21,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const handleSubmit = async () => {
-  //   setIsLoading(true)
-  //   axios.post(`${BASE_URL}/api/v1/accounts/login`, {
-  //     email,
-  //     password
-  //   })
-  //     .then((res) => {
-  //       setIsLoading(false)
-  //       let userInfo = res.data;
-  //       console.log(userInfo);
-  //       AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
-  //       navigation.navigate("Home")
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false)
-  //       console.log(err)
-  //     })
-  // }
-
   const handleLogin = async () => {
-    // setIsLoading(true)
     try {
       const res = await axios.post(`${BASE_URL}/api/v1/accounts/login`, {
         email,
@@ -52,20 +32,7 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       console.log(error);
     }
-    
-      // .then((res) => {
-      //   console.log("user logger", res.data.accessToken);
-        
-      //   // AsyncStorage.setItem("accessToken", res.data.accessToken);
-      //   // AsyncStorage.setItem("accountUsername", );
-      //   console.log("username", res.data.accountUsername);
-      //   // navigation.navigate("Home");
-      // })
-      // .catch((err) => {
-      //   // setIsLoading(false)
-      //   console.log(err)
-      // })
-      navigation.navigate("Home");
+    navigation.navigate("Home");
   }
 
 
